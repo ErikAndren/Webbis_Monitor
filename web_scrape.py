@@ -29,7 +29,7 @@ city = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bcityt
 
 comment = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bcommenttxt"]/text()')
 
-# FIXME: Possible to replace with 
+# FIXME: Possible to replace with XPath equivalent to rmeove cssselect dependency
 meta_content = tree.cssselect('meta[property="og:title"]')[0].get('content')
 
 # http://stackoverflow.com/questions/22745876/python-print-unicode-list
