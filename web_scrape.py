@@ -3,6 +3,7 @@
 #Scrapes the webbis page
 
 from lxml import html
+from lxml import cssselect
 import requests
 
 import sys
@@ -28,6 +29,9 @@ city = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bcityt
 
 comment = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bcommenttxt"]/text()')
 
+# FIXME: Possible to replace with 
+meta_content = tree.cssselect('meta[property="og:title"]')[0].get('content')
+
 # http://stackoverflow.com/questions/22745876/python-print-unicode-list
 # Convert list elements to unicode
 parent_utf = repr([x.encode(sys.stdout.encoding) for x in parents]).decode('string-escape')
@@ -44,6 +48,8 @@ print 'Weight: ', weight
 print 'Length: ', length
 print 'City: ', city_utf
 print 'Comment: ', comment_utf
+
+print 'Content: ', meta_content
 
 # Store in database
 
