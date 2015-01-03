@@ -59,6 +59,7 @@ print 'Content: ', meta_content
 newWebbis = webbis.Webbis(webbis_id, parent_utf, gender, name_utf, birthdate, birthtime, weight, length, city_utf, comment_utf)
 
 # newWebbis.displayWebbis()
+sql_handle.store(newWebbis)
 
 # Store in database
 
