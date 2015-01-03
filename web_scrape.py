@@ -5,10 +5,12 @@
 from lxml import html
 from lxml import cssselect
 import requests
-
 import sys
+import webbis
 
-page = requests.get('http://www.akademiska.se/sv/Webbisar/Webbis/?WebbisID=4555')
+webbis_id = '4555'
+
+page = requests.get('http://www.akademiska.se/sv/Webbisar/Webbis/?WebbisID=' + webbis_id)
 tree = html.fromstring(page.text)
 
 parents = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bparenttxt"]/text()')
@@ -51,8 +53,10 @@ print 'Comment: ', comment_utf
 
 print 'Content: ', meta_content
 
+newWebbis = webbis.Webbis(webbis_id, parent_utf, gender, name_utf, birthdate, birthtime, weight, length, city_utf, comment_utf)
+
+newWebbis.displayWebbis()
+
 # Store in database
-
-
 
 # Send email
