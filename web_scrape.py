@@ -11,8 +11,13 @@ import webbis_sql
 
 sql_handle = webbis_sql.WebbisSql('webbis.db')
 
+i = 1
 
-
-newWebbis = webbis.fetchExternal(webbis_id)
+while True:
+    newWebbis = webbis.fetchExternal(str(i))
+    if newWebbis == None:
+        break
+    
+    i = i + 1
 
 # Send email
