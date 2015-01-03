@@ -7,8 +7,11 @@ from lxml import cssselect
 import requests
 import sys
 import webbis
+import webbis_sql
 
 webbis_id = '4555'
+
+sql_handle = webbis_sql.WebbisSql('webbis.db')
 
 page = requests.get('http://www.akademiska.se/sv/Webbisar/Webbis/?WebbisID=' + webbis_id)
 tree = html.fromstring(page.text)
@@ -55,7 +58,7 @@ print 'Content: ', meta_content
 
 newWebbis = webbis.Webbis(webbis_id, parent_utf, gender, name_utf, birthdate, birthtime, weight, length, city_utf, comment_utf)
 
-newWebbis.displayWebbis()
+# newWebbis.displayWebbis()
 
 # Store in database
 
