@@ -35,11 +35,7 @@ class WebbisSql:
             )")
 
     def store(self, webbis):
-        sql_string = "INSERT INTO WEBBIS VALUES(", webbis.webid, ", ", webbis.parents, ", ", webbis.gender, ", ", webbis.name, ", ", webbis.birthdate, ", ", webbis.birthtime, ", ", webbis.weight, ", ", webbis.length, ", ", webbis.city, ", ", webbis.comment, ")"
-        print sql_string
-        self.con.execute(sql_string)
-
-#        self.con.execute("INSERT INTO WEBBIS VALUES(", webbis.webid, ", ", webbis.parents, ", ", webbis.gender, ", ", webbis.name, ", ", webbis.birthdate, ", ", webbis.birthtime, ", ", webbis.weight, ", ", webbis.length, ", ", webbis.city, ", ", webbis.comment, ")")
+        self.con.execute("INSERT INTO WEBBIS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (webbis.webid,  webbis.parents,  webbis.gender,  webbis.name,  webbis.birthdate,  webbis.birthtime,  webbis.weight,  webbis.length,  webbis.city,  webbis.comment))
         
 
     
