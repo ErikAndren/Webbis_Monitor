@@ -37,30 +37,20 @@ comment = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bco
 # FIXME: Possible to replace with XPath equivalent to remove cssselect dependency
 meta_content = tree.cssselect('meta[property="og:title"]')[0].get('content')
 
-# http://stackoverflow.com/questions/22745876/python-print-unicode-list
-# Convert list elements to unicode
-parent_utf = repr([x.encode(sys.stdout.encoding) for x in parents]).decode('string-escape')
-name_utf = repr([x.encode(sys.stdout.encoding) for x in name]).decode('string-escape')
-city_utf = repr([x.encode(sys.stdout.encoding) for x in city]).decode('string-escape')
-comment_utf = repr([x.encode(sys.stdout.encoding) for x in comment]).decode('string-escape')
-
-print 'Parents: ', parent_utf
-print 'Gender: ', gender
-print 'Name: ', name_utf
-print 'Birth date: ', birthdate
-print 'Birth time: ', birthtime
-print 'Weight: ', weight
-print 'Length: ', length
-print 'City: ', city_utf
-print 'Comment: ', comment_utf
-
+print 'Parents: ', parents[0]
+print 'Gender: ', gender[0]
+print 'Name: ', name[0]
+print 'Birth date: ', birthdate[0]
+print 'Birth time: ', birthtime[0]
+print 'Weight: ', weight[0]
+print 'Length: ', length[0]
+print 'City: ', city[0]
+print 'Comment: ', comment[0]
 print 'Content: ', meta_content
 
-newWebbis = webbis.Webbis(webbis_id, parent_utf, gender, name_utf, birthdate, birthtime, weight, length, city_utf, comment_utf)
-
-# newWebbis.displayWebbis()
-sql_handle.store(newWebbis)
+newWebbis = webbis.Webbis(webbis_id, parents[0], gender[0], name[0], birthdate[0], birthtime[0], weight[0], length[0], city[0], comment[0])
 
 # Store in database
+sql_handle.store(newWebbis)
 
 # Send email
