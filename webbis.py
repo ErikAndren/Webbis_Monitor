@@ -26,7 +26,7 @@ class Webbis:
         print "Webid: ", self.webid, ", Parents: ", self.parents, ", Gender: ", self.gender, ", Name: ", self.name, ", Birthdate", self.birthdate, ", Birthtime ", self.birthtime, ", Weight ", self.weight, ", Length ", self.length, ", City ", self.city, ", Comment ", self.comment
 
 
-
+# FIXME: Migrate to static method instead
 def fetchExternal(wid):
     page = requests.get('http://www.akademiska.se/sv/Webbisar/Webbis/?WebbisID=' + wid)
     tree = html.fromstring(page.text)
