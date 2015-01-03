@@ -2,16 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import sqlite3 as lite
+import webbis
 import sys
 
 class WebbisSql:
     'Class containing the sql stitching'
 
     def __init__(self, db):
-        con = lite.connect(db)
+        self.con = lite.connect(db)
 
-        with con:
-            cur = con.cursor()    
+        with self.con:
+            cur = self.con.cursor()    
 
             # Create table
             cur.execute("CREATE TABLE IF NOT EXISTS LAST_ID(Id INT primary key, last INT)")
@@ -32,5 +33,13 @@ class WebbisSql:
             city TEXT,  \
             comment TEXT \
             )")
+
+    def store(self, webbis):
+        sql_string = "INSERT INTO WEBBIS VALUES(", webbis.webid, ", ", webbis.parents, ", ", webbis.gender, ", ", webbis.name, ", ", webbis.birthdate, ", ", webbis.birthtime, ", ", webbis.weight, ", ", webbis.length, ", ", webbis.city, ", ", webbis.comment, ")"
+        print sql_string
+        self.con.execute(sql_string)
+
+#        self.con.execute("INSERT INTO WEBBIS VALUES(", webbis.webid, ", ", webbis.parents, ", ", webbis.gender, ", ", webbis.name, ", ", webbis.birthdate, ", ", webbis.birthtime, ", ", webbis.weight, ", ", webbis.length, ", ", webbis.city, ", ", webbis.comment, ")")
+        
 
     
