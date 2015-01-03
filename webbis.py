@@ -30,6 +30,7 @@ class Webbis:
 
 # FIXME: Migrate to static method instead
 # FIXME: Must handle twins etc
+# FIXME: Must allow each field to be empty
 def fetchExternal(wid):
     page = requests.get('http://www.akademiska.se/sv/Webbisar/Webbis/?WebbisID=' + wid)
     tree = html.fromstring(page.text)
@@ -42,7 +43,31 @@ def fetchExternal(wid):
     weight = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bweighttxt"]/text()')
     length = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_blengthtxt"]/text()')
     city = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bcitytxt"]/text()')
+
+    twingender = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwingendertxt"]/text()')
+    twinname = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinNametxt"]/text()')
+    twinbirthdate = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinbirthdatetxt"]/text()')
+    twinbirthtime = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinbirthtimetxt"]/text()')
+    twinweight = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinweighttxt"]/text()')
+    twinlength = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinlengthtxt"]/text()')
+    twincity = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwincitytxt"]/text()')
+
     comment = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bcommenttxt"]/text()')
+
+    #HACK: For some reason comment parsing fails when handling twins
+    if len(comment) == 0:
+        comment = [""]
+    
+    # print parents[0]
+    # print gender[0]
+    # print name[0]
+    # print birthdate[0]
+    # print birthtime[0]
+    # print weight[0]
+    # print length[0]
+    # print city[0]
+    # print comment[0]
+
 
     # FIXME: Possible to replace with XPath equivalent to remove cssselect dependency
     meta_content = tree.cssselect('meta[property="og:title"]')[0].get('content')
