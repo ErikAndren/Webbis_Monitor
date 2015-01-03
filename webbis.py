@@ -3,16 +3,6 @@
 
 class Webbis:
     'Class containing all data for a Webbis'
-    webid = -1
-    parents = ""
-    gender = ""
-    name = ""
-    birthdate = ""
-    birthtime = ""
-    weight = "" 
-    length = ""
-    city = ""
-    comment = ""
 
     def __init__(self, webid, parents, gender, name, birthdate, birthtime, weight, length, city, comment):
         self.webid = webid
@@ -27,6 +17,6 @@ class Webbis:
         self.comment = comment
 
     def displayWebbis(self):
-        print "Webid: ", self.webid, ", Parents: ", self.parents, ", gender ", self.gender, ", name: ", self.name, ", birthdate", self.birthdate, ", birthtime ", self.birthtime, ", weight ", self.weight, ", length ", self.length, ", city ", self.city, ", comment ", self.comment
+        print "Webid: ", self.webid, ", Parents: ", self.parents, ", Gender: ", self.gender, ", Name: ", self.name, ", Birthdate", self.birthdate, ", Birthtime ", self.birthtime, ", Weight ", self.weight, ", Length ", self.length, ", City ", self.city, ", Comment ", self.comment
 
         
