@@ -4,7 +4,7 @@
 import sqlite3 as lite
 import sys
 
-con = lite.connect('test.db')
+con = lite.connect('webbis.db')
 
 with con:
     cur = con.cursor()    
@@ -28,3 +28,5 @@ with con:
     city TEXT,  \
     comment TEXT \
     )")
+
+    
