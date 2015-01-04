@@ -55,19 +55,32 @@ def fetchExternal(wid):
     comment = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bcommenttxt"]/text()')
 
     #HACK: For some reason comment parsing fails when handling twins
+    if len(parents) == 0:
+        parents = [""]
+
+    if len(gender) == 0:
+        gender = [""]
+
+    if len(name) == 0:
+        name = [""]
+
+    if len(birthdate) == 0:
+        birthdate = [""]
+
+    if len(birthtime) == 0:
+        birthtime = [""]
+    
+    if len(weight) == 0:
+        weight = [""]
+
+    if len(length) == 0:
+        length = [""]
+
+    if len(city) == 0:
+        city = [""]
+
     if len(comment) == 0:
         comment = [""]
-    
-    # print parents[0]
-    # print gender[0]
-    # print name[0]
-    # print birthdate[0]
-    # print birthtime[0]
-    # print weight[0]
-    # print length[0]
-    # print city[0]
-    # print comment[0]
-
 
     # FIXME: Possible to replace with XPath equivalent to remove cssselect dependency
     meta_content = tree.cssselect('meta[property="og:title"]')[0].get('content')
