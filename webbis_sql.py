@@ -31,11 +31,15 @@ class WebbisSql:
             weight INT, \
             length INT, \
             city TEXT,  \
+            twingender TEXT, \
+            twinname TEXT, \
+            twinbirthdate TEXT, \
+            twinbirthtime TEXT, \
+            twinweight TEXT, \
+            twinlength TEXT, \
+            twincity TEXT, \
             comment TEXT \
             )")
 
     def store(self, webbis):
-        self.con.execute("INSERT INTO WEBBIS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (webbis.webid,  webbis.parents,  webbis.gender,  webbis.name,  webbis.birthdate,  webbis.birthtime,  webbis.weight,  webbis.length,  webbis.city,  webbis.comment))
-        
-
-    
+        self.con.execute("INSERT INTO WEBBIS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (webbis.webid,  webbis.parents,  webbis.gender,  webbis.name,  webbis.birthdate,  webbis.birthtime,  webbis.weight,  webbis.length,  webbis.city,  webbis.twingender, webbis.twinname, webbis.twinbirthdate, webbis.twinbirthtime, webbis.twinweight, webbis.twinlength, webbis.twincity, webbis.comment))
