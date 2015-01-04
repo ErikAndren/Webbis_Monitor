@@ -34,7 +34,7 @@ class Webbis:
         self.displayWebbis()
 
     def displayWebbis(self):
-        print "Webid: ", self.webid, ", Parents: ", self.parents, ", Gender: ", self.gender, ", Name: ", self.name, ", Birthdate", self.birthdate, ", Birthtime ", self.birthtime, ", Weight ", self.weight, ", Length ", self.length, ", City ", self.city, ", Twin gender: ", self.twingender, " Twin name: ", self.twinname, " Twin birth date: ", self.twinbirthdate, " Twin birth time: ", self.twinbirthtime, " Twin weight: ", self.twinweight, " Twin length: ", self.twinlength, " Twin city: ", self.twincity, ", Comment ", self.comment
+        print "Webid: ", self.webid, ", Parents: ", self.parents, ", Gender: ", self.gender, ", Name: ", self.name, ", Birthdate: ", self.birthdate, ", Birthtime: ", self.birthtime, ", Weight: ", self.weight, ", Length: ", self.length, ", City: ", self.city, ", Twin gender: ", self.twingender, " Twin name: ", self.twinname, " Twin birth date: ", self.twinbirthdate, " Twin birth time: ", self.twinbirthtime, " Twin weight: ", self.twinweight, " Twin length: ", self.twinlength, " Twin city: ", self.twincity, ", Comment ", self.comment
 
 # FIXME: Migrate to static method instead
 def fetchExternal(wid):
@@ -51,7 +51,7 @@ def fetchExternal(wid):
     city = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_bcitytxt"]/text()')
 
     twingender = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwingendertxt"]/text()')
-    twinname = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinNametxt"]/text()')
+    twinname = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinnametxt"]/text()')
     twinbirthdate = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinbirthdatetxt"]/text()')
     twinbirthtime = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinbirthtimetxt"]/text()')
     twinweight = tree.xpath('//*[@id="ctl00_MainRegion_MainContentRegion_webbisUnit_btwinweighttxt"]/text()')
@@ -115,6 +115,6 @@ def fetchExternal(wid):
     if meta_content == 'Webbis':
         return None
 
-    newWebbis = Webbis(wid, parents[0], gender[0], name[0], birthdate[0], birthtime[0], weight[0], length[0], city[0], twingender[0], twinname[0], twinbirthdate[0], twinbirthtime[0], twinweight[0], twinlength[0], twincity[0], comment[0])
+    newWebbis = Webbis(wid, parents[0].rstrip(), gender[0].rstrip(), name[0].rstrip(), birthdate[0].rstrip(), birthtime[0].rstrip(), weight[0].rstrip(), length[0].rstrip(), city[0].rstrip(), twingender[0].rstrip(), twinname[0].rstrip(), twinbirthdate[0].rstrip(), twinbirthtime[0].rstrip(), twinweight[0].rstrip(), twinlength[0].rstrip(), twincity[0].rstrip(), comment[0].rstrip())
 
     return newWebbis
