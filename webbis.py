@@ -10,7 +10,7 @@ import sys
 class Webbis:
     'Class containing all data for a Webbis'
 
-    def __init__(self, webid, parents, gender, name, birthdate, birthtime, weight, length, city, comment):
+    def __init__(self, webid, parents, gender, name, birthdate, birthtime, weight, length, city, twingender, twinname, twinbirthdate, twinbirthtime, twinweight, twinlength, twincity, comment):
         self.webid = webid
         self.parents = parents
         self.gender = gender
@@ -20,17 +20,23 @@ class Webbis:
         self.weight = weight
         self.length = length
         self.city = city
+
+        self.twingender = twingender
+        self.twinname = twinname
+        self.twinbirthdate = twinbirthdate
+        self.twinbirthtime = twinbirthtime
+        self.twinweight = twinweight
+        self.twinlength = twinlength
+        self.twincity = twincity
+
         self.comment = comment
 
         self.displayWebbis()
 
     def displayWebbis(self):
-        print "Webid: ", self.webid, ", Parents: ", self.parents, ", Gender: ", self.gender, ", Name: ", self.name, ", Birthdate", self.birthdate, ", Birthtime ", self.birthtime, ", Weight ", self.weight, ", Length ", self.length, ", City ", self.city, ", Comment ", self.comment
-
+        print "Webid: ", self.webid, ", Parents: ", self.parents, ", Gender: ", self.gender, ", Name: ", self.name, ", Birthdate", self.birthdate, ", Birthtime ", self.birthtime, ", Weight ", self.weight, ", Length ", self.length, ", City ", self.city, ", Twin gender: ", self.twingender, " Twin name: ", self.twinname, " Twin birth date: ", self.twinbirthdate, " Twin birth time: ", self.twinbirthtime, " Twin weight: ", self.twinweight, " Twin length: ", self.twinlength, " Twin city: ", self.twincity, ", Comment ", self.comment
 
 # FIXME: Migrate to static method instead
-# FIXME: Must handle twins etc
-# FIXME: Must allow each field to be empty
 def fetchExternal(wid):
     page = requests.get('http://www.akademiska.se/sv/Webbisar/Webbis/?WebbisID=' + wid)
     tree = html.fromstring(page.text)
@@ -79,6 +85,27 @@ def fetchExternal(wid):
     if len(city) == 0:
         city = [""]
 
+    if len(twingender) == 0:
+        twingender = [""]
+
+    if len(twinname) == 0:
+        twinname = [""]
+
+    if len(twinbirthdate) == 0:
+        twinbirthdate = [""]
+
+    if len(twinbirthtime) == 0:
+        twinbirthtime = [""]
+    
+    if len(twinweight) == 0:
+        twinweight = [""]
+
+    if len(twinlength) == 0:
+        twinlength = [""]
+
+    if len(twincity) == 0:
+        twincity = [""]
+
     if len(comment) == 0:
         comment = [""]
 
@@ -88,6 +115,6 @@ def fetchExternal(wid):
     if meta_content == 'Webbis':
         return None
 
-    newWebbis = Webbis(wid, parents[0], gender[0], name[0], birthdate[0], birthtime[0], weight[0], length[0], city[0], comment[0])
+    newWebbis = Webbis(wid, parents[0], gender[0], name[0], birthdate[0], birthtime[0], weight[0], length[0], city[0], twingender[0], twinname[0], twinbirthdate[0], twinbirthtime[0], twinweight[0], twinlength[0], twincity[0], comment[0])
 
     return newWebbis
