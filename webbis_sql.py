@@ -16,11 +16,8 @@ class WebbisSql:
 
             # Create table
             cur.execute("CREATE TABLE IF NOT EXISTS LAST_ID(Id INT primary key, last INT)")
-
-            # Insert first and only entry
-            self.con.execute("INSERT OR REPLACE INTO LAST_ID VALUES(0, 0)")
                 
-            # Create last id control
+            # Create last id control, do not update 
             cur.execute("INSERT OR IGNORE INTO LAST_ID VALUES(0, 0)")
 
             # Create webbis table
@@ -52,7 +49,14 @@ class WebbisSql:
 
     def update_last(self, new_id):
         update_string = "UPDATE LAST_ID SET last = MAX(Id, " + str(new_id) + ") WHERE Id = 0";
-        print update_string
         self.con.execute(update_string)
         self.con.commit();
+
+    def fetch_last_entry(self):
+        cur = self.con.cursor()
+        cur.execute("SELECT last FROM LAST_ID WHERE Id = 0");
+        return cur.fetchone()[0]
+        
+
+
 
