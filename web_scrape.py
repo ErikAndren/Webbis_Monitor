@@ -11,8 +11,10 @@ import webbis_sql
 
 sql_handle = webbis_sql.WebbisSql('webbis.db')
 
-i = 0
-max_i = 2
+last_stored_entry = sql_handle.fetch_last_entry()
+print "Stored entry is ", str(last_stored_entry)
+i = last_stored_entry
+none_cnt = 0
 
 while True:
     i = i + 1
@@ -22,6 +24,9 @@ while True:
 
     newWebbis = webbis.fetchExternal(str(i))
     if newWebbis == None:
+        none_cnt++
+        if none_cnt >= 3:
+            break
         continue
 
     sql_handle.store(newWebbis)
