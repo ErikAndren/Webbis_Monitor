@@ -2,10 +2,6 @@
 # -*- coding: utf-8 -*-
 #Scrapes the webbis page
 
-from lxml import html
-from lxml import cssselect
-import requests
-import sys
 import webbis
 import webbis_sql
 
@@ -15,6 +11,7 @@ last_stored_entry = sql_handle.fetch_last_entry()
 print "Stored entry is ", str(last_stored_entry)
 i = last_stored_entry
 none_cnt = 0
+max_i = 10000
 
 while True:
     i = i + 1
@@ -24,7 +21,7 @@ while True:
 
     newWebbis = webbis.fetchExternal(str(i))
     if newWebbis == None:
-        none_cnt++
+        none_cnt = none_cnt + 1
         if none_cnt >= 3:
             break
         continue
