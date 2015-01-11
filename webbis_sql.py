@@ -22,7 +22,7 @@ class WebbisSql:
 
             # Create webbis table
             cur.execute("Create TABLE IF NOT EXISTS WEBBIS( \
-            Id INT primary key, \
+            id INT primary key, \
             parents TEXT, \
             gender TEXT, \
             name TEXT, \
@@ -41,6 +41,15 @@ class WebbisSql:
             comment TEXT \
             )")
 
+            # Create TRIGGER_RULES table
+            cur.execute("Create TABLE IF NOT EXISTS TRIGGER_RULE( \
+            rule TEXT, \
+            receiver TEXT \
+            )")
+
+            # Insert rule
+            cur.execute("INSERT OR REPLACE INTO TRIGGER_RULE VALUES(?, ?)", ("Jill", "erik.andren@gmail.com"));
+            
             self.con.commit();
 
     def store(self, webbis):
@@ -48,13 +57,13 @@ class WebbisSql:
         self.con.commit();
 
     def update_last(self, new_id):
-        update_string = "UPDATE LAST_ID SET last = MAX(Id, " + str(new_id) + ") WHERE Id = 0";
+        update_string = "UPDATE LAST_ID SET last = MAX(id, " + str(new_id) + ") WHERE id = 0";
         self.con.execute(update_string)
         self.con.commit();
 
     def fetch_last_entry(self):
         cur = self.con.cursor()
-        cur.execute("SELECT last FROM LAST_ID WHERE Id = 0");
+        cur.execute("SELECT last FROM LAST_ID WHERE id = 0");
         return cur.fetchone()[0]
         
 
