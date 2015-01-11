@@ -5,6 +5,10 @@
 import webbis
 import webbis_sql
 
+mail_passwd = raw_input('Enter mail password:')
+
+
+
 sql_handle = webbis_sql.WebbisSql('webbis.db')
 
 last_stored_entry = sql_handle.fetch_last_entry()
