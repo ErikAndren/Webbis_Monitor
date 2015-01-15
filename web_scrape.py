@@ -13,7 +13,9 @@ def send_email(username, password):
     server.ehlo()
     server.starttls()
     server.login(username, password)
-    server.sendmail("erik.andren@gmail.com", ["erik.andren@gmail.com"], "Testing")
+    
+    message = 'Subject: %s\n\n%s' % ("En webbismatchning har hittats", "Testing")
+    server.sendmail("erik.andren@gmail.com", ["erik.andren@gmail.com"], message)
     server.quit()
 
 #mail_passwd = raw_input('Enter mail password:')
@@ -22,9 +24,10 @@ sql_handle = webbis_sql.WebbisSql('webbis.db')
 
 last_stored_entry = sql_handle.fetch_last_entry()
 print "Stored entry is ", str(last_stored_entry)
-i = last_stored_entry
+# i = last_stored_entry
+i = 0
 none_cnt = 0
-max_i = 10000
+max_i = 3
 
 #send_email("erik.andren@gmail.com", mail_passwd)
 
@@ -43,4 +46,16 @@ while True:
 
     sql_handle.store(newWebbis)
     sql_handle.update_last(i)
+
+    # Check if any of the rules matches the newly downloaded entry
+    rule_match_cursor = sql_handle.rule_match(newWebbis)
+    while True:
+        result_row = rule_match_cursor.fetchone()
+        if result_row == None:
+            break
+    
+        print "Found match", result_row
+#        send_email(
+
+
     
