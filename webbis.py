@@ -31,7 +31,7 @@ class Webbis:
 
         self.comment = comment
 
-        self.displayWebbis()
+        # self.displayWebbis()
 
     def displayWebbis(self):
         print "Webid: ", self.webid, ", Parents: ", self.parents, ", Gender: ", self.gender, ", Name: ", self.name, ", Birthdate: ", self.birthdate, ", Birthtime: ", self.birthtime, ", Weight: ", self.weight, ", Length: ", self.length, ", City: ", self.city, ", Twin gender: ", self.twingender, " Twin name: ", self.twinname, " Twin birth date: ", self.twinbirthdate, " Twin birth time: ", self.twinbirthtime, " Twin weight: ", self.twinweight, " Twin length: ", self.twinlength, " Twin city: ", self.twincity, ", Comment ", self.comment
