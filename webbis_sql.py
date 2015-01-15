@@ -43,29 +43,35 @@ class WebbisSql:
 
             # Create TRIGGER_RULES table
             cur.execute("Create TABLE IF NOT EXISTS TRIGGER_RULE( \
-            rule TEXT, \
+            rule TEXT primary key, \
             receiver TEXT \
             )")
 
             # Insert rule
-            cur.execute("INSERT OR REPLACE INTO TRIGGER_RULE VALUES(?, ?)", ("Jill", "erik.andren@gmail.com"));
+            cur.execute("INSERT OR REPLACE INTO TRIGGER_RULE VALUES(?, ?)", ("Paulina", "erik.andren@gmail.com"))
             
-            self.con.commit();
+            self.con.commit()
 
     def store(self, webbis):
         self.con.execute("INSERT OR REPLACE INTO WEBBIS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (webbis.webid,  webbis.parents,  webbis.gender,  webbis.name,  webbis.birthdate,  webbis.birthtime,  webbis.weight,  webbis.length,  webbis.city,  webbis.twingender, webbis.twinname, webbis.twinbirthdate, webbis.twinbirthtime, webbis.twinweight, webbis.twinlength, webbis.twincity, webbis.comment))
-        self.con.commit();
+        self.con.commit()
 
     def update_last(self, new_id):
-        update_string = "UPDATE LAST_ID SET last = MAX(id, " + str(new_id) + ") WHERE id = 0";
+        update_string = "UPDATE LAST_ID SET last = MAX(id, " + str(new_id) + ") WHERE id = 0"
         self.con.execute(update_string)
-        self.con.commit();
+        self.con.commit()
 
     def fetch_last_entry(self):
         cur = self.con.cursor()
-        cur.execute("SELECT last FROM LAST_ID WHERE id = 0");
+        cur.execute("SELECT last FROM LAST_ID WHERE id = 0")
         return cur.fetchone()[0]
         
+    def rule_match(self, webbis):
+        cur = self.con.cursor()
+        cur.execute("SELECT * FROM TRIGGER_RULE WHERE ? LIKE '%' || rule || '%'", (webbis.parents, ))
+
+        return cur
+
 
 
 
