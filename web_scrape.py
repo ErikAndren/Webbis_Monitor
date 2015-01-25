@@ -30,8 +30,6 @@ i = 0
 none_cnt = 0
 max_i = 3
 
-#send_email("erik.andren@gmail.com", mail_passwd)
-
 while True:
     i = i + 1
 
