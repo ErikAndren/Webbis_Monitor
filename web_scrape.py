@@ -7,18 +7,19 @@ import webbis_sql
 import smtplib
 
 # Send email
-def send_email(username, password):
+def send_email(username, password, recepient, webbis):
     # The actual mail send
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.ehlo()
     server.starttls()
     server.login(username, password)
-    
-    message = 'Subject: %s\n\n%s' % ("En webbismatchning har hittats", "Testing")
-    server.sendmail("erik.andren@gmail.com", ["erik.andren@gmail.com"], message)
+
+    message = 'Subject: %s\n\n%s' % ("En webbismatchning har hittats", webbis.toString())
+    server.sendmail("erik.andren@gmail.com", [recepient], message)
     server.quit()
 
-#mail_passwd = raw_input('Enter mail password:')
+mail_username = raw_input('Enter mail username:')
+mail_passwd = raw_input('Enter mail password:')
 
 sql_handle = webbis_sql.WebbisSql('webbis.db')
 
@@ -55,7 +56,4 @@ while True:
             break
     
         print "Found match", result_row
-#        send_email(
-
-
-    
+        send_email(mail_username, mail_passwd, result_row, newWebbis)
