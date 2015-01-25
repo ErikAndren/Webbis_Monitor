@@ -48,7 +48,7 @@ class WebbisSql:
             )")
 
             # Insert rule
-            cur.execute("INSERT OR REPLACE INTO TRIGGER_RULE VALUES(?, ?)", ("Paulina", "erik.andren@gmail.com"))
+            cur.execute("INSERT OR REPLACE INTO TRIGGER_RULE VALUES(?, ?)", ("Kit", "erik.andren@gmail.com"))
             
             self.con.commit()
 
@@ -68,7 +68,7 @@ class WebbisSql:
         
     def rule_match(self, webbis):
         cur = self.con.cursor()
-        cur.execute("SELECT receiver FROM TRIGGER_RULE WHERE ? LIKE '%' || rule || '%'", (webbis.parents, ))
+        cur.execute("SELECT receiver FROM TRIGGER_RULE WHERE ? LIKE '%' || rule || '%' OR ? LIKE '%' || rule || '%'", (webbis.parents, webbis.name))
         return cur
 
 
