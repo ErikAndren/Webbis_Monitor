@@ -39,6 +39,9 @@ class Webbis:
     def displayWebbis(self):
         print toString(self)
 
+    def genUrl(self):
+        return ("http://www.akademiska.se/sv/Webbisar/Webbis/?WebbisID=" + self.webid)
+
 # FIXME: Migrate to static method instead
 def fetchExternal(wid):
     page = requests.get('http://www.akademiska.se/sv/Webbisar/Webbis/?WebbisID=' + wid)
