@@ -14,7 +14,7 @@ def send_email(username, password, recepient, webbis):
     server.starttls()
     server.login(username, password)
 
-    message = 'Subject: %s\n\n%s' % ("En webbismatchning har hittats", webbis.toString())
+    message = 'Subject: %s\n\n%s\n\n%s' % ("En webbismatchning har hittats", webbis.toString(), webbis.genUrl())
     server.sendmail("erik.andren@gmail.com", [recepient], message)
     server.quit()
 
@@ -25,6 +25,7 @@ sql_handle = webbis_sql.WebbisSql('webbis.db')
 
 last_stored_entry = sql_handle.fetch_last_entry()
 print "Stored entry is ", str(last_stored_entry)
+
 # i = last_stored_entry
 i = 0
 none_cnt = 0
