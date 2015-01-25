@@ -68,7 +68,7 @@ class WebbisSql:
         
     def rule_match(self, webbis):
         cur = self.con.cursor()
-        cur.execute("SELECT receiver FROM TRIGGER_RULE WHERE ? LIKE '%' || rule || '%' OR ? LIKE '%' || rule || '%'", (webbis.parents, webbis.name))
+        cur.execute("SELECT receiver FROM TRIGGER_RULE WHERE ? LIKE '%' || rule || '%' OR ? LIKE '%' || rule || '%' OR ? LIKE '%' || rule || '%'", (webbis.parents, webbis.name, webbis.twinname))
         return cur
 
 
